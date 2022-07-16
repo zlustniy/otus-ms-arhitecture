@@ -22,5 +22,16 @@ docker push zlustniy/otus-ms-architecture
 ```
 To push a new tag to this repository,
 ```shell
-docker push zlustniy/otus-ms-architecture-zakirov:tagname
+docker push zlustniy/otus-ms-architecture:tagname
+```
+
+### K8S
+```shell
+kubectl apply -f 1-deployment.yaml
+```
+```shell
+kubectl --namespace otus port-forward pod/otus-first-homework-69fd7c856d-2nzjr 8000:8000
+```
+```shell
+minikube ip
 ```
