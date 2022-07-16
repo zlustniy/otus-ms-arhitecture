@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: otus-first-homework
+  namespace: otus
+spec:
+  type: ClusterIP
+  ports:
+    - port: 7777
+      targetPort: 8000
+  selector:
+    app: otus-first-homework
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otus-first-homework
+  namespace: otus
+  labels:
+    app: test
+spec:
+  selector:
+    matchLabels:
+      app: otus-first-homework
+  replicas: 3
+  strategy:
+
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: otus-first-homework
+    spec:
+      containers:
+        - image: zlustniy/otus-ms-architecture:1.1
+          name: otus-ms-architecture-first
+          ports:
+            - containerPort: 8000
+          imagePullPolicy: IfNotPresent
