@@ -24,7 +24,6 @@ spec:
       app: otus-first-homework
   replicas: 3
   strategy:
-
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
