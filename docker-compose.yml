@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  otus-service:
+    image: otus-ms-architecture:latest
+    container_name: otus-ms-architecture
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - "8000:5000"
