@@ -35,3 +35,21 @@ kubectl --namespace otus port-forward pod/otus-first-homework-69fd7c856d-2nzjr 8
 ```shell
 minikube ip
 ```
+
+```shell
+kubectl get -n otus deployments
+```
+
+
+### Запуск приложения:
+```shell
+kubectl create ns otus
+kubectl apply -f .
+```
+### Удаление приложения:
+```shell
+kubectl delete ingress -n otus otus-first-homework
+kubectl delete service -n otus otus-first-homework
+kubectl delete deployment -n otus otus-first-homework
+kubectl delete ns otus
+```
