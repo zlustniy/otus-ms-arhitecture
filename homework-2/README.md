@@ -1,60 +1,62 @@
-1.
-```
-ссылка на директорию в github, где находится директория с манифестами кубернетеса
-```
+1. Сделал helm-chart
+https://github.com/zlustniy/otus-ms-arhitecture/tree/master/k8s/manifest
+https://github.com/zlustniy/otus-ms-arhitecture/tree/master/k8s/manifest/app-chart
+2. Запуск приложения:
+   1. Запуск приложения, вместе с базой данных:
+       ```shell
+       helm install otus-app ./app-chart
+       ```
+   2. JOB миграции
+      ```
+      kubectl apply -f initdb.yaml 
+      ```
 
-2. 
+Команда удаления приложения:
+```shell
+helm delete otus-app
 ```
-инструкция по запуску приложения
-```
-- команда установки БД из helm, вместе с файлом values.yaml: 
-
-    ### Запуск приложения:
-    ```shell
-    kubectl create ns otus
-    kubectl apply -f .
-    ```
-    ### Удаление приложения:
-    ```shell
-    kubectl delete ingress -n otus otus-first-homework
-    kubectl delete service -n otus otus-first-homework
-    kubectl delete deployment -n otus otus-first-homework
-    kubectl delete ns otus
-    ```
-4. Коллекция Postman https://github.com/zlustniy/otus-ms-arhitecture/blob/master/homework-1/OTUS.postman_collection.json
-   ```shell
-   /otus-ms-arhitecture/homework-1$ newman run OTUS.postman_collection.json
+3. Коллекция Postman https://github.com/zlustniy/otus-ms-arhitecture/blob/master/homework-2/OTUS-2.postman_collection.json
+```shell
+   /otus-ms-arhitecture/homework-2$ newman run OTUS-2.postman_collection.json 
    newman
    
-   OTUS
+   OTUS-2
    
-   → health
-     GET http://arch.homework/health/ [200 OK, 147B, 52ms]
+   → Создание пользователя
+     POST http://arch.homework/user/ [200 OK, 272B, 101ms]
      ✓  Status code is 200
-     ✓  Status OK
    
-   → health rewrite пути
-     GET http://arch.homework/otusapp/zakirov-max/health/ [200 OK, 147B, 12ms]
+   → Получение пользователя
+     GET http://arch.homework/user/15/ [200 OK, 272B, 19ms]
+   
+   → Обновление пользователя
+     PUT http://arch.homework/user/15/ [200 OK, 288B, 16ms]
      ✓  Status code is 200
-     ✓  Status OK
    
-   ┌─────────────────────────┬───────────────────┬──────────────────┐
-   │                         │          executed │           failed │
-   ├─────────────────────────┼───────────────────┼──────────────────┤
-   │              iterations │                 1 │                0 │
-   ├─────────────────────────┼───────────────────┼──────────────────┤
-   │                requests │                 2 │                0 │
-   ├─────────────────────────┼───────────────────┼──────────────────┤
-   │            test-scripts │                 4 │                0 │
-   ├─────────────────────────┼───────────────────┼──────────────────┤
-   │      prerequest-scripts │                 2 │                0 │
-   ├─────────────────────────┼───────────────────┼──────────────────┤
-   │              assertions │                 4 │                0 │
-   ├─────────────────────────┴───────────────────┴──────────────────┤
-   │ total run duration: 150ms                                      │
-   ├────────────────────────────────────────────────────────────────┤
-   │ total data received: 30B (approx)                              │
-   ├────────────────────────────────────────────────────────────────┤
-   │ average response time: 32ms [min: 12ms, max: 52ms, s.d.: 20ms] │
-   └────────────────────────────────────────────────────────────────┘
-   ```
+   → Удаление пользователя
+     DELETE http://arch.homework/user/15/ [200 OK, 288B, 19ms]
+     ✓  Status code is 200
+   
+   → Удалить всех пользователей
+     DELETE http://arch.homework/user/ [200 OK, 133B, 20ms]
+   
+   ┌─────────────────────────┬───────────────────┬───────────────────┐
+   │                         │          executed │            failed │
+   ├─────────────────────────┼───────────────────┼───────────────────┤
+   │              iterations │                 1 │                 0 │
+   ├─────────────────────────┼───────────────────┼───────────────────┤
+   │                requests │                 5 │                 0 │
+   ├─────────────────────────┼───────────────────┼───────────────────┤
+   │            test-scripts │                 9 │                 0 │
+   ├─────────────────────────┼───────────────────┼───────────────────┤
+   │      prerequest-scripts │                 5 │                 0 │
+   ├─────────────────────────┼───────────────────┼───────────────────┤
+   │              assertions │                 3 │                 0 │
+   ├─────────────────────────┴───────────────────┴───────────────────┤
+   │ total run duration: 340ms                                       │
+   ├─────────────────────────────────────────────────────────────────┤
+   │ total data received: 590B (approx)                              │
+   ├─────────────────────────────────────────────────────────────────┤
+   │ average response time: 35ms [min: 16ms, max: 101ms, s.d.: 33ms] │
+   └─────────────────────────────────────────────────────────────────┘
+```
