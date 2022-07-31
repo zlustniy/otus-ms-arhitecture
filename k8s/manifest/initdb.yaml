@@ -11,14 +11,27 @@ spec:
       containers:
         - name: post-install-job
           image: postgres:latest
-          env:
-            - name: POSTGRES_PASSWORD
-              value: "postgres"
           command:
             - sh
             - "-c"
             - |
-              psql postgresql+psycopg2://postgres:postgres@otus-app-postgresql:5432/postgres <<'EOF'
-                create table user2 (id  serial primary key);
+              psql postgres://postgres:postgres@otus-app-postgresql:5432/postgres <<'EOF'
+              create table "user"
+              (
+                  id          serial
+                      primary key,
+                  username    varchar(128) not null
+                      unique,
+                  "firstName" varchar(128),
+                  "lastName"  varchar(128),
+                  email       varchar(128),
+                  phone       varchar(12)
+              );
+              
+              alter table "user"
+                  owner to postgres;
+              
+              create index ix_user_id
+                  on "user" (id);
               EOF
   backoffLimit: 0
