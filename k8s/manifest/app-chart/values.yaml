@@ -8,9 +8,10 @@ service:
   type: ClusterIP
   port: 7777
  
-externalPostgresql:
+postgresql:
+  enabled: true
   postgresqlUsername: postgres
   postgresqlPassword: postgres
   postgresqlDatabase: postgres
-  postgresqlHost: "postgres"
-  postgresqlPort: "5432"
+  service:
+    port: "5432"
