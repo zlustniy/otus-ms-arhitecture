@@ -1,0 +1,16 @@
+namespace: otus
+replicaCount: 2
+ 
+image:
+  repository: zlustniy/otus-ms-architecture
+ 
+service:
+  type: ClusterIP
+  port: 7777
+ 
+externalPostgresql:
+  postgresqlUsername: postgres
+  postgresqlPassword: postgres
+  postgresqlDatabase: postgres
+  postgresqlHost: "postgres"
+  postgresqlPort: "5432"

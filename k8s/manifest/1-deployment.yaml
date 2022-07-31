@@ -34,8 +34,19 @@ spec:
         app: otus-first-homework
     spec:
       containers:
-        - image: zlustniy/otus-ms-architecture:1.1
+        - image: zlustniy/otus-ms-architecture:1.2
           name: otus-ms-architecture-first
+          env:
+              - name: DATABASE_URI
+                valueFrom:
+                  secretKeyRef:
+                    name: app-secret
+                    key: DATABASE_URI
+              - name: GREETING
+                valueFrom:
+                  configMapKeyRef:
+                    name: app-config
+                    key: GREETING
           ports:
             - containerPort: 8000
           imagePullPolicy: IfNotPresent

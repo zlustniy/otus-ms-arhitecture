@@ -17,6 +17,7 @@ poetry install --no-root
 
 ### DockerHUB
 ```shell
+docker-compose build
 docker tag otus-ms-architecture zlustniy/otus-ms-architecture
 docker push zlustniy/otus-ms-architecture
 ```
@@ -26,6 +27,11 @@ docker push zlustniy/otus-ms-architecture:tagname
 ```
 
 ### K8S
+```shell
+minikube start –vm-driver=virtualbox
+minikube dashboard
+```
+
 ```shell
 kubectl apply -f 1-deployment.yaml
 ```
@@ -46,10 +52,23 @@ kubectl get -n otus deployments
 kubectl create ns otus
 kubectl apply -f .
 ```
+```shell
+kubectl create ns postgres
+kubectl -n postgres apply -f postgres.yaml
+kubectl -n postgres port-forward postgres-statefulset-0 5435:5432
+```
+
 ### Удаление приложения:
 ```shell
 kubectl delete ingress -n otus otus-first-homework
 kubectl delete service -n otus otus-first-homework
 kubectl delete deployment -n otus otus-first-homework
 kubectl delete ns otus
+```
+
+```shell
+helm install otus-app ./app-chart
+```
+```shell
+helm delete otus-app
 ```
