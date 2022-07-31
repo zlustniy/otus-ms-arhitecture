@@ -59,6 +59,8 @@ class UserCreate(BaseModel):
 
 
 class User(UserCreate):
+    id: int
+
     class Config:
         orm_mode = True
 
