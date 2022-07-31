@@ -15,6 +15,9 @@ SQLAlchemy = {extras = ["asyncio"], version = "^1.4.39"}
 alembic = "^1.8.1"
 asyncpg = "^0.26.0"
 psycopg2-binary = "^2.9.3"
+fastapi-crudrouter = "^0.8.5"
+python-dotenv = "^0.20.0"
+databases = "^0.6.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

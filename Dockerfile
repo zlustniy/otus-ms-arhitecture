@@ -20,7 +20,7 @@ RUN python -m venv /venv
 COPY pyproject.toml poetry.lock ./
 RUN poetry export -f requirements.txt | /venv/bin/pip install -r /dev/stdin
 
-COPY otus-service ./otus-service
+COPY otus_service ./otus-service
 RUN poetry build && /venv/bin/pip install dist/*.whl
 
 FROM base as final

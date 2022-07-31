@@ -13,7 +13,7 @@ metadata:
   namespace: otus
 type: Opaque
 data:
-  DATABASE_URI: {{ printf "postgresql+psycopg2://%s:%s@%s:%s/%s" 
+  DATABASE_URI: {{ printf "postgresql+asyncpg://%s:%s@%s:%s/%s" 
     .Values.postgresql.postgresqlUsername 
     .Values.postgresql.postgresqlPassword 
     (include "postgresql.fullname" .) 

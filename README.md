@@ -72,3 +72,26 @@ helm install otus-app ./app-chart
 ```shell
 helm delete otus-app
 ```
+
+### Работа с БД. Миграции.
+
+Для создания миграции:
+
+```shell
+alembic revision --message=message --autogenerate
+```
+
+Для применения миграции:
+
+```shell
+alembic upgrade head
+```
+
+Откатить последнюю миграцию:
+
+```shell
+alembic downgrade -1
+```
+
+Если добавляется новая модель, необходимо обязательно ее импортировать в ../models/__init__.py, чтобы alembic стал
+отслеживать ее.
