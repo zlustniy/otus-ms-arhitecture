@@ -1,13 +1,13 @@
-namespace: otus
+namespace: default
 replicaCount: 2
- 
+
 image:
   repository: zlustniy/otus-ms-architecture
- 
+
 service:
   type: ClusterIP
   port: 7777
- 
+
 postgresql:
   enabled: true
   postgresqlUsername: postgres

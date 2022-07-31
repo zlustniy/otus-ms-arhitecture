@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "otus-service"
+name = "otus_service"
 version = "0.1.0"
 description = ""
 authors = ["Max Zakirov <maksim.zakirov@zyfra.com>"]
 packages = [
-    { include = "otus-service" }
+    { include = "otus_service" }
 ]
 
 [tool.poetry.dependencies]

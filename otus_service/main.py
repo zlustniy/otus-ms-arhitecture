@@ -4,7 +4,7 @@ import os
 from fastapi import FastAPI
 from fastapi_crudrouter import SQLAlchemyCRUDRouter
 from pydantic import BaseModel
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from otus_service import constants
@@ -30,18 +30,24 @@ async def configuration():
     return json.dumps(config)
 
 
-engine = create_async_engine(constants.DATABASE_URI, echo=False, future=True)
-session_cls = sessionmaker(engine, class_=AsyncSession)
-session_cls.db_url = constants.DATABASE_URI
+engine = create_engine(
+    constants.DATABASE_URI,
+)
+
+session_cls = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
 
 
 async def get_db():
     session = session_cls()
     try:
         yield session
-        await session.commit()
+        session.commit()
     finally:
-        await session.close()
+        session.close()
 
 
 class UserCreate(BaseModel):

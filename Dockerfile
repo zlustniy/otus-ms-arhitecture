@@ -20,13 +20,14 @@ RUN python -m venv /venv
 COPY pyproject.toml poetry.lock ./
 RUN poetry export -f requirements.txt | /venv/bin/pip install -r /dev/stdin
 
-COPY otus_service ./otus-service
+COPY otus_service ./otus_service
 RUN poetry build && /venv/bin/pip install dist/*.whl
 
 FROM base as final
 
-RUN apk add --no-cache libffi libpq
+RUN apk add --no-cache libffi libpq alembic
 COPY --from=builder /venv /venv
+COPY alembic.ini ./alembic.ini
 COPY docker-entrypoint.sh ./
 RUN chmod +x docker-entrypoint.sh
 

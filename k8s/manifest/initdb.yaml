@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "otus-app-migration"
+spec:
+  template:
+    metadata:
+      name: "otus-app-migration"
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: post-install-job
+          image: postgres:latest
+          env:
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+          command:
+            - sh
+            - "-c"
+            - |
+              psql postgresql+psycopg2://postgres:postgres@otus-app-postgresql:5432/postgres <<'EOF'
+                create table user2 (id  serial primary key);
+              EOF
+  backoffLimit: 0

@@ -1,6 +1,6 @@
 version: '3.7'
 services:
-  otus-service:
+  otus_service:
     image: otus-ms-architecture:latest
     container_name: otus-ms-architecture
     build:
@@ -8,4 +8,6 @@ services:
       dockerfile: Dockerfile
     restart: on-failure
     ports:
-      - "8000:8000"
+      - "8001:8000"
+    env_file:
+      - .env

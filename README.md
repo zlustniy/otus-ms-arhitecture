@@ -18,8 +18,8 @@ poetry install --no-root
 ### DockerHUB
 ```shell
 docker-compose build
-docker tag otus-ms-architecture zlustniy/otus-ms-architecture
-docker push zlustniy/otus-ms-architecture
+docker tag otus-ms-architecture zlustniy/otus-ms-architecture:latest
+docker push zlustniy/otus-ms-architecture:latest
 ```
 To push a new tag to this repository,
 ```shell
@@ -58,6 +58,10 @@ kubectl -n postgres apply -f postgres.yaml
 kubectl -n postgres port-forward postgres-statefulset-0 5435:5432
 ```
 
+```shell
+kubectl port-forward service/otus-app-postgresql 5435:5432
+```
+
 ### Удаление приложения:
 ```shell
 kubectl delete ingress -n otus otus-first-homework
@@ -71,6 +75,10 @@ helm install otus-app ./app-chart
 ```
 ```shell
 helm delete otus-app
+```
+
+```shell
+kubectl get all
 ```
 
 ### Работа с БД. Миграции.
